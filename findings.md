@@ -8,15 +8,19 @@ The project consists three tables, consisting sales data    about bike accessori
 
 Table existence and structure were confirmed via `information_schema.tables` and `information_schema.columns` before any analysis began.
 ## dim_products
-**Structure:** 295 rows, 11 columns. Primary key: `product_key`. 
-Display ID: `product_id`.
+**Structure:** 295 rows, 11 columns. 
+- Primary key: `product_key`. 
+
 **Categorical structure:** 5 distinct categories, 37 distinct subcategories, 5 distinct product lines. 
+
 **Nulls:** 7 rows have null `category`, `subcategory`, and `maintenance` 
-(same 7 rows affected across all three columns).
-**Duplicates:** No duplicate `product_id` values, no duplicate full rows, 
-no duplicate `product_name` values.
-**maintenance column:** Holds 3 values — `Yes`, `No`, and null. Likely 
-indicates whether a product requires periodic upkeep.
+
+**Duplicates:**
+- No duplicates in `product_id` 
+- No duplicate, full rows,
+- No duplicate in `product_name` 
+**maintenance column:** Holds 3 values — `Yes`, `No`, and null
+
 **Dimension vs. measure:** All columns are dimensions (descriptive attributes) 
 except `cost`, which is the sole measure in this table.
 ## dim_customers
