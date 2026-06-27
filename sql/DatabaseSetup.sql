@@ -53,4 +53,3 @@ COPY gold.fact_sales FROM 'D:\Sales-Analysis1\Data\fact_sales.csv' WITH (FORMAT 
 
 
 
-
