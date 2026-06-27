@@ -5,6 +5,7 @@ The project consists three tables, consisting sales data    about bike accessori
 - `dim_customers`- 18,484 rows, 10 columns
 - `dim_products` - 295 rows, 11 columns
 - `fact_sales` - 60,398 rows, 9 columns
+
 Table existence and structure were confirmed via `information_schema.tables` and `information_schema.columns` before any analysis began.
 ## dim_products
 **Structure:** 295 rows, 11 columns. Primary key: `product_key`. 
