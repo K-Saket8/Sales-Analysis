@@ -91,21 +91,20 @@ separate count-based method showing 19 nulls. Root cause: `COUNT(column)`
 always excludes nulls, even inside a `WHERE ... IS NULL` filter — so 
 counting the column itself inside that filter will always return 0 
 regardless of how many nulls exist. Resolved by using `COUNT(*)` instead.
-## Magnitude & Ranking observations
 
 ## Magnitude & Ranking Observations
 
 **Product revenue tiering:** Total sales by `product_key` shows a clear 
-tier structure rather than a smooth decline — the top 11 products form a 
-distinct high-revenue cluster, with a sharp ~300,000 drop after rank 11 
-into the next tier.
+tier structure rather than a smooth decline. The top 11 products form a 
+distinct high-revenue cluster, with a sharp ~300,000 drop into the next tier.
 
 Within that top-11 cluster, a secondary pattern emerged: ranks 1–6 achieve 
 their revenue through higher unit volume (~560+ units), while ranks 7–11 
 achieve similar revenue through significantly higher per-unit `cost` despite 
 lower volume (~337 units). Confirmed by pulling `cost` alongside sales/units 
 for these products directly — cost rises sharply right where unit volume 
-drops. This indicates the top revenue tier is not homogeneous: it blends a 
+drops.
+This indicates the top revenue tier is not homogeneous: it blends a 
 higher-volume, moderately-priced group with a lower-volume, premium-priced 
 group.
 
