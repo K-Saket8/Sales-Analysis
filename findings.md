@@ -24,44 +24,40 @@ Table existence and structure were confirmed via `information_schema.tables` and
 **Dimension vs. measure:** All columns are dimensions (descriptive attributes) 
 except `cost`, which is the sole measure in this table.
 ## dim_customers
-**Structure:** 18,484 rows, 10 columns. Primary key: `customer_key`. 
-Display ID: `customer_id`. A third identifier, `customer_number`, is also 
-present.
-
+**Structure:** 18,484 rows, 10 columns. 
+- Primary key: `customer_key`. 
 **Identifier consistency:** Verified that `customer_key`, `customer_id`, and 
 `customer_number` are all perfectly 1:1 with each other — no nulls, no 
 duplicates, and no inconsistent pairings across all 18,484 rows.
 
 **Name collisions:** Several pairs of customers share the same first and 
-last name. Cross-checked against `country`, `gender`, and `birthdate` — 
+last name. Cross-checked against `country`, `gender`, and `birthdate`,
 confirmed these are distinct individuals with coincidentally matching names, 
 not duplicate customer records.
 
 **Categorical columns:**
 - `country` — 7 distinct values. No true NULLs, but 337 rows use the 
-  literal placeholder string `'n/a'` instead of a real country — a 
+  literal placeholder string `'n/a'` instead of a real country, a 
   standard null-count check would miss this, since `'n/a'` is a non-null 
-  string. Caught only by inspecting distinct values directly.
-- `gender` — 3 values: Male, Female, and a missing/unknown category.
-- `marital_status` — 2 values: Married, Unmarried.
+  string. 
+- `gender` - 3 values: Male, Female, and a missing/unknown category.
+- `marital_status` -c 2 values: Married, Unmarried.
 
 **birthdate:** 17 nulls. 6,135 distinct values out of 18,467 non-null rows 
-(duplicates expected and not problematic for a date column). Range: 
-1916-02-10 (oldest customer, age ~110) to 1986-06-25 (youngest customer, 
-age ~40). The 1916 outlier was investigated — multiple customers have 
-genuinely old, distinct (non-repeating) birthdates, ruling out a 
-placeholder/default-date bug.
+(duplicates expected and not problematic for a date column). 
+Range: 
+1916-02-10 (oldest customer, age ~110) to 1986-06-25 (youngest customer,age ~40). 
 
-**create_date:** No nulls. Range: 2025-10-06 to 2026-01-27 — a notably 
-tight ~4-month window for an entire customer base, worth noting as an 
-observation even without a confirmed explanation.
+**create_date:** No nulls. Range: 2025-10-06 to 2026-01-27 , a notably 
+tight ~4-month window for an entire customer base
 ## fact_sales
 
-**Structure:** 60,398 rows, 9 columns. Primary key: `order_number`. 
-Foreign keys: `product_key`, `customer_key`.
+**Structure:** 60,398 rows, 9 columns.
+- Primary key: `order_number`. 
+- Foreign keys: `product_key`, `customer_key`.
 
-**Grain:** Confirmed to be one row per order line item, not one row per 
-order. `order_number` repeats (27,659 distinct values across 60,398 rows) 
+**Grain:** one row per product per order
+ `order_number` repeats (27,659 distinct values across 60,398 rows) 
 because a single order can contain multiple products — verified by 
 inspecting repeated `order_number`s directly: `customer_key` stays constant 
 within an order while `product_key` varies. This means `SUM(sales_amount) 
@@ -114,15 +110,12 @@ higher-volume, moderately-priced group with a lower-volume, premium-priced
 group.
 
 **Revenue by country:** Customer base spans 7 countries. Revenue is heavily 
-concentrated — the US and Australia lead with ~9.16M and ~9.06M respectively, 
-while the next country (UK) drops sharply to ~3.39M, roughly a third of the 
-top two. This concentration is worth deeper investigation in the analysis 
-phase (e.g. part-to-whole: what % of total revenue do the top 2 countries 
-represent).
+concentrated in 2 countries- the US and Australia lead with ~9.16M and ~9.06M respectively, 
+while the next country (UK) drops sharply to ~3.39M. This concentration is worth deeper investigation in the analysis 
+phase.
 
 **Top/bottom customers by spend:** Identified the top 5 and bottom 5 
-customers by total `sales_amount` across all their orders — a starting 
-point for the customer segmentation work planned in the analysis phase.
+customers by total `sales_amount` across all their orders.
 
 
 
