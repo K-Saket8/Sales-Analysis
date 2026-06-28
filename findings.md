@@ -2,19 +2,23 @@
  
 ## 📋Executive Summary
 
-An exploratory data analysis (EDA) conducted on a  sales database containing customer, product, and transactional sales data. The objective was to understand the database structure, validate data quality, verify relationships between tables, and identify characteristics that could influence subsequent business analysis.
+An exploratory data analysis (EDA) was conducted on a sales database containing customer, product, and transactional sales data. The objective was to understand the database structure, validate data quality, verify relationships between tables, and identify characteristics that could influence subsequent business analysis.
 
 - All three tables were successfully validated.
-- Structural validation confirmed that primary keys are unique, foreign key relationships are intact.
+- Structural validation confirmed unique primary keys and complete referential integrity across all tables.
 - Minor data quality issues were identified (missing product attributes, placeholder country values, missing birthdates, and missing order dates). None of these issues compromise the overall usability of the dataset.
 - Initial revenue concentration and product performance patterns were identified for deeper investigation.
 
 
-## 📊Database Overview
-The project consists three tables, consisting sales data about bike accessories.
-- `dim_customers`- 18,484 rows, 10 columns
-- `dim_products` - 295 rows, 11 columns
-- `fact_sales` - 60,398 rows, 9 columns
+## 📊 Database Overview
+
+The database follows a star schema consisting of two dimension tables and one fact table representing bicycle product sales.
+
+| Table | Rows | Columns | Description |
+|:------|-----:|--------:|:------------|
+| `dim_customers` | 18,484 | 10 | Customer data |
+| `dim_products` | 295 | 11 | Product catalog |
+| `fact_sales` | 60,398 | 9 | Transactional sales records |
 ### Entity Relationship Diagram
 
 ```mermaid
@@ -94,7 +98,8 @@ tight ~4-month window for an entire customer base
 - Primary key: `order_number`. 
 - Foreign keys: `product_key`, `customer_key`.
 
-**Grain:** one row per product per order
+**Grain:** 
+> The fact table stores one record per product per order.
 
 `order_number` repeats (27,659 distinct values across 60,398 rows) 
 
@@ -140,12 +145,24 @@ lower volume (~337 units).
 concentrated in 2 countries- the **US** and **Australia** lead with ~9.16M and ~9.06M respectively, 
 while the next country (UK) drops sharply to ~3.39M. 
 
-This concentration is worth deeper investigation in the analysis 
-phase.
+> This concentration is worth deeper investigation in the analysis phase.
 
 **Top/bottom customers by spend:** Identified the top 5 and bottom 5 
 customers by total `sales_amount` across all their orders.
 
+## Analysis Readiness
+
+The dataset is suitable for business analysis.
+
+Key validations performed during EDA include:
+
+- Primary keys are unique.
+- Foreign key relationships are intact.
+- The fact table grain was confirmed as one product per order line.
+- Date relationships are logically consistent.
+- Minor missing values and placeholder entries were identified and documented.
+
+**No structural issues were found that would prevent further analysis.**
 
 
 
