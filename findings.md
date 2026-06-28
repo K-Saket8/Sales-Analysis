@@ -1,11 +1,21 @@
 # Findings-Exploratory data analysis
  
+## 📋Executive Summary
+
+An exploratory data analysis (EDA) conducted on a  sales database containing customer, product, and transactional sales data. The objective was to understand the database structure, validate data quality, verify relationships between tables, and identify characteristics that could influence subsequent business analysis.
+
+- All three tables were successfully validated.
+- Structural validation confirmed that primary keys are unique, foreign key relationships are intact.
+- Minor data quality issues were identified (missing product attributes, placeholder country values, missing birthdates, and missing order dates). None of these issues compromise the overall usability of the dataset.
+- Initial revenue concentration and product performance patterns were identified for deeper investigation.
+
+
 ## 📊Database Overview
 The project consists three tables, consisting sales data about bike accessories.
 - `dim_customers`- 18,484 rows, 10 columns
 - `dim_products` - 295 rows, 11 columns
 - `fact_sales` - 60,398 rows, 9 columns
-## Entity Relationship Diagram
+### Entity Relationship Diagram
 
 ```mermaid
 erDiagram
@@ -40,8 +50,8 @@ erDiagram
     dim_customers ||--o{ fact_sales : "customer_key"
     dim_products ||--o{ fact_sales : "product_key"
 ```
-Table existence and structure were confirmed via `information_schema.tables` and `information_schema.columns` before any analysis began.
-## dim_products
+Table metadata was validated using information_schema.tables and information_schema.columns prior to analysis.
+## 📦dim_products
 **Structure:** 295 rows, 11 columns. 
 - Primary key: `product_key`. 
 
@@ -54,7 +64,7 @@ Table existence and structure were confirmed via `information_schema.tables` and
 
 **Dimension vs. measure:** All columns are dimensions (descriptive attributes) 
 except `cost`.
-## dim_customers
+## 👥dim_customers
 **Structure:** 18,484 rows, 10 columns. 
 - Primary key: `customer_key`. 
 
@@ -62,11 +72,7 @@ except `cost`.
 `customer_number` are all perfectly 1:1 with each other- no nulls, no 
 duplicates, and no inconsistent pairings across all 18,484 rows.
 
-**Name collisions:** Several pairs of customers share the same first and last name.
-
-Cross-checked against `country`, `gender`, and `birthdate`,
-confirmed these are distinct individuals with coincidentally matching names, 
-not duplicate customer records.
+**Name collisions:** Multiple customers share identical names; validation against birthdate, gender, and country confirmed these represent distinct individuals rather than duplicate records.
 
 **Categorical columns:**
 - `country` — 7 distinct values. No true NULLs, but 337 rows use the 
@@ -82,7 +88,7 @@ Range:
 
 **create_date:** No nulls. Range: **`2025-10-06`** to **`2026-01-27`** , a  
 tight ~4-month window for an entire customer base
-## fact_sales
+## 🚚fact_sales
 
 **Structure:** 60,398 rows, 9 columns.
 - Primary key: `order_number`. 
@@ -119,7 +125,7 @@ violations.
 - `price` — min 2, max 3,578, avg 486.05 (matches `sales_amount` 
   coincidentally)
 
-## Magnitude & Ranking Observations
+## 🔍Magnitude & Ranking Observations
 
 **Product revenue tiering:** Total sales by `product_key` shows a clear 
 tier structure rather than a smooth decline. The top products form a 
