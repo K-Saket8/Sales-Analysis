@@ -6,10 +6,39 @@ The project consists three tables, consisting sales data about bike accessories.
 - `dim_products` - 295 rows, 11 columns
 - `fact_sales` - 60,398 rows, 9 columns
 ## Entity Relationship Diagram
+
 ```mermaid
 erDiagram
-    dim_customers ||--o{ fact_sales : customer_key
-    dim_products  ||--o{ fact_sales : product_key
+
+    dim_customers {
+        int customer_key PK
+        int customer_id
+        string customer_number
+        string first_name
+        string last_name
+        string country
+    }
+
+    dim_products {
+        int product_key PK
+        int product_id
+        string product_name
+        string category
+        string subcategory
+        int cost
+    }
+
+    fact_sales {
+        string order_number PK
+        int customer_key FK
+        int product_key FK
+        date order_date
+        int quantity
+        int sales_amount
+    }
+
+    dim_customers ||--o{ fact_sales : "customer_key"
+    dim_products ||--o{ fact_sales : "product_key"
 ```
 Table existence and structure were confirmed via `information_schema.tables` and `information_schema.columns` before any analysis began.
 ## dim_products
