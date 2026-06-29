@@ -46,13 +46,13 @@ A star-schema sales database consisting of:
 2. **Business Analysis** - Answered the two questions above using SQL 
    (aggregation, window functions for ranking and segmentation). 
    See [`insights.md`](insights.md) for full write-up.
-3. **Visualization** - built an interactive Tableau dashboard to present 
+3. **Visualization** - Built an interactive Tableau dashboard to present 
    the findings.
 
 ## Key Insights
 
 - **Revenue is concentrated in 2 of 7 countries** (US: 31.2%, Australia: 
-  30.9%) - but for different reasons. The US leads on customer volume; 
+  30.9%) , but for different reasons. The US leads on customer volume; 
   Australia leads on higher average order value, driven by a higher mix 
   of premium product purchases.
 - **The top third of customers (by spend) generate 87.5% of total 
