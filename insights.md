@@ -1,4 +1,4 @@
-# Insights — Business Analysis
+# Insights - Business Analysis
 
 ## 📋 Executive Summary
 
