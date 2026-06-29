@@ -5,7 +5,7 @@ exploring revenue concentration across customer segments and geographic
 markets. Built using PostgreSQL for data validation and analysis, with 
 findings visualized in Tableau.
 
-## 🎯Objective
+## Objective
 
 This project investigates two core business questions:
 
@@ -15,11 +15,11 @@ This project investigates two core business questions:
    what separates high-value customers from low-value ones?
 
 
-## 📊Dashboard
+## Dashboard
 
 ![Dashboard Screenshot](screenshots/your_filename_here.png)
 
-## 📑Dataset
+## Dataset
 
 A star-schema sales database consisting of:
 
@@ -29,7 +29,7 @@ A star-schema sales database consisting of:
 | `dim_products` | 295 | Product catalog (categories, subcategories, cost) |
 | `fact_sales` | 60,398 | Transaction-level sales records (line-item grain) |
 
-## ⚙️Tools
+## Tools
 
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white)
 ![SQL](https://img.shields.io/badge/SQL-025E8C?style=for-the-badge)
@@ -37,7 +37,7 @@ A star-schema sales database consisting of:
 ![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)
 ![VS Code](https://img.shields.io/badge/VS_Code-007ACC?style=for-the-badge&logo=visualstudiocode&logoColor=white)
 
-## ⌛Process
+## Process
 
 1. **Data Exploration** - Validated table structure, primary/foreign key 
    integrity, identified data quality issues (nulls, disguised missing 
