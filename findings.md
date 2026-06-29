@@ -79,7 +79,7 @@ duplicates, and no inconsistent pairings across all 18,484 rows.
 **Name collisions:** Multiple customers share identical names; validation against birthdate, gender, and country confirmed these represent distinct individuals rather than duplicate records.
 
 **Categorical columns:**
-- `country` — 7 distinct values. No true NULLs, but 337 rows use the 
+- `country` - 7 distinct values. No true NULLs, but 337 rows use the 
   literal placeholder string `'n/a'` instead of a real country.
 - `gender` - 3 values: Male, Female, and a missing/unknown category.
 - `marital_status` -c 2 values: Married, Unmarried.
@@ -125,9 +125,9 @@ date ordering (`order_date < shipping_date < due_date`) holds with no
 violations.
 
 **Measures:**
-- `sales_amount` — min 2, max 3,578, avg 486.05
-- `quantity` — min 1, max 10, avg 1.00
-- `price` — min 2, max 3,578, avg 486.05 (matches `sales_amount` 
+- `sales_amount` - min 2, max 3,578, avg 486.05
+- `quantity` - min 1, max 10, avg 1.00
+- `price` - min 2, max 3,578, avg 486.05 (matches `sales_amount` 
   coincidentally)
 
 ## 🔍Magnitude & Ranking Observations
